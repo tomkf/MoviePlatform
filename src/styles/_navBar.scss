@@ -1,0 +1,31 @@
+.navBar{
+    width: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #081c24;
+    width: 100%;
+    z-index: 999;
+    height: 158px;
+    display: flex;
+    align-items: center;
+
+        .logo{
+            width: 7%;
+            margin-left: 4%;
+        }
+    
+
+    ul{
+        font-size: 1em;
+        box-sizing: border-box;
+        width: 40%;
+
+        li{
+            list-style: none; 
+            margin-left: 2%;
+            text-transform: uppercase;
+            display: inline;
+        };
+    }
+}
