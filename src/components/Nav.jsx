@@ -6,7 +6,6 @@ import logo from '../images/movieLogo.png'
 const styles = { color: 'white', textDecoration: 'none' }
 
 const Nav = () => (
-    <div className="navContainer"> 
 	<nav className="navBar">
      <Image  className="logo" src={logo} roundedCircle /> 
         <ul>
@@ -17,7 +16,6 @@ const Nav = () => (
             <li><NavLink style={styles} to="/ratings">Your Ratings</NavLink></li>
         </ul>
 	</nav>
-    </div>
 );
 
 export default Nav;

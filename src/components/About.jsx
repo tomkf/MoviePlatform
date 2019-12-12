@@ -7,8 +7,10 @@ class About extends React.Component {
     render() {
       return <div>
         <Nav></Nav>
+        <div className="contentWrap"> 
         <h1>About</h1>
         </div>
+       </div>
     }
   }
 

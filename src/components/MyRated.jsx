@@ -5,7 +5,9 @@ class MyRated extends React.Component {
     render() {
       return <div>
         <Nav></Nav>
+        <div className="contentWrap"> 
         <h1>MyRated</h1>
+        </div>
         </div>
     }
   }
