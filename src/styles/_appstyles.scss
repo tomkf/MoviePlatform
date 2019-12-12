@@ -11,9 +11,16 @@
     display: flex;
     align-items: center;
 
+        .logo{
+            width: 7%;
+            margin-left: 4%;
+        }
+    
+
     ul{
         font-size: 1em;
         box-sizing: border-box;
+        width: 40%;
         li{
             list-style: none; 
             margin-left: 2%;

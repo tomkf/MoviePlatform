@@ -8,7 +8,7 @@ const styles = { color: 'white', textDecoration: 'none' }
 const Nav = () => (
     <div className="navContainer"> 
 	<nav className="navBar">
-    {/* <div> <Image  className="logo" src={logo} roundedCircle /> </div> */}
+     <Image  className="logo" src={logo} roundedCircle /> 
         <ul>
             <li><NavLink style={styles} to="/" exact>Home</NavLink></li>
             <li><NavLink style={styles} to="/about">About</NavLink></li>
