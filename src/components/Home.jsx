@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav'
 import InputGroup  from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl'
+import token from '../utilities'
 
 class Home extends React.Component {
     render() {
@@ -18,6 +19,14 @@ class Home extends React.Component {
            <FormControl />
         </InputGroup>
       </section>
+      <section className="topResultBox">
+        <h2>Most popular: </h2>
+        <div className="titlesContainer">
+
+        </div>
+      </section>
+
+
        </div>
       </div>
       );
