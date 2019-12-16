@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav'
 import InputGroup  from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl'
+import Card from 'react-bootstrap/Card'
 import token from '../utilities'
 
 class Home extends React.Component {
@@ -23,7 +24,6 @@ class Home extends React.Component {
     if (response.ok) { // if HTTP-status is 200-299
       // get the response body (the method explained below)
       let json = await response.json();
-      console.log(json)
       this.retrunState(json.results)
     } else {
       alert("HTTP-Error: " + response.status);
@@ -38,16 +38,23 @@ class Home extends React.Component {
       workingState.push(json[i])
     }
     this.setState((prevState) => { return { films: workingState, render: true}})
-    console.log("hi", this.state.films)
   }
 
   renderRes(items){
-    console.log("hi from the render", this.state.films)
-    let filmArr =  items.map(film =>  <h1> {film.title} </h1> );
+    let filmArr =  items.map(film =>  ( 
+  <Card style={{ width: '18rem' }} className="filmCard">
+  <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`}  variant="top"/>
+  <Card.Body>
+    <Card.Title> {film.title} </Card.Title>
+    <Card.Text>
+     {film.overview}
+    </Card.Text>
+  </Card.Body>
+</Card>
+     ));
     return (  <div className="titlesContainer"> { filmArr} </div>)
   }
 
-  
     render() {
       return (
       <div>
