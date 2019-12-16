@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.j
-# /src/utilities.js
+./src/utilities.js
 
 # testing
 /coverage
