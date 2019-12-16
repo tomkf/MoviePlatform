@@ -18,11 +18,11 @@ class Home extends React.Component {
     this.getData();
   }
 
+  //fetch top 12 from api
   getData(){
     let res = (async () => { let response = await fetch(`https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=${token}`);
 
-    if (response.ok) { // if HTTP-status is 200-299
-      // get the response body (the method explained below)
+    if (response.ok) { 
       let json = await response.json();
       this.retrunState(json.results)
     } else {
@@ -31,6 +31,7 @@ class Home extends React.Component {
      })();
   }
  
+  //pass the api result to components state
   retrunState(json){
   let workingState = [];
 
@@ -40,6 +41,7 @@ class Home extends React.Component {
     this.setState((prevState) => { return { films: workingState, render: true}})
   }
 
+  //return rendered list of movies
   renderRes(items){
     let filmArr =  items.map(film =>  ( 
   <Card style={{ width: '18rem' }} className="filmCard">
