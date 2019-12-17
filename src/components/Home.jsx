@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav'
 import genericMovie from '../images/genericMovie.png'
+import { Redirect } from 'react-router-dom'
 
 //bootstrap components
 import InputGroup  from 'react-bootstrap/InputGroup';
@@ -11,6 +12,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
+//API token required here
 import token from '../utilities'
 
 class Home extends React.Component {
@@ -51,14 +53,18 @@ class Home extends React.Component {
     this.setState((prevState) => { return { films: workingState, render: true}})
   }
 
+
+
+  //send clicked film to film page
   routeFilm(filmObj){
     console.log(filmObj)
+    return <Redirect to='/favorites' />
   }
 
   //return rendered list of movies
   renderRes(items){
     let filmArr =  items.map(film =>  ( 
-  <Card bg="light" style={{ width: '20rem' }} className="filmCard" onClick={this.routeFilm(film)}>
+  <Card bg="light" style={{ width: '20rem' }} className="filmCard" onClick={() => this.routeFilm(film.title)}>
   <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
   <Card.Body>
     <Card.Title> {film.title} </Card.Title> 
@@ -74,6 +80,7 @@ class Home extends React.Component {
     return (  <div className="titlesContainer"> { filmArr} </div>)
   }
 
+  //return readable date
   parseDate(dateStr){
   let year = dateStr.slice(0, 4)
   let month = dateStr.slice(5, 7)
@@ -124,6 +131,7 @@ class Home extends React.Component {
 
   changeTitle = title =>  this.setState((prevState) => { return { searchTitle: title} })
 
+  //make new request to API
    handleChange = val =>  {
     switch (val) {
       case 1:
