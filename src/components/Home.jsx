@@ -1,8 +1,14 @@
 import React from 'react';
 import Nav from './Nav'
+
+//bootstrap components
 import InputGroup  from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl'
-import Card from 'react-bootstrap/Card'
+import FormControl from 'react-bootstrap/FormControl';
+import Card from 'react-bootstrap/Card';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+
 import token from '../utilities'
 
 class Home extends React.Component {
@@ -10,17 +16,19 @@ class Home extends React.Component {
     super(props);
     this.state = {
       films: null,
-      render: false
+      render: false,
+      searchTitle: "Most Popular:"
     }
   }  
 
   componentDidMount(){
-    this.getData();
+    this.getData("https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc");
   }
 
   //fetch top 12 from api
-  getData(){
-    let res = (async () => { let response = await fetch(`https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=${token}`);
+  getData(apiUrl){
+    console.log(apiUrl)
+    let res = (async () => { let response = await fetch(`${apiUrl}&api_key=${token}&language=en-US&page=1`);
 
     if (response.ok) { 
       let json = await response.json();
@@ -57,6 +65,29 @@ class Home extends React.Component {
     return (  <div className="titlesContainer"> { filmArr} </div>)
   }
 
+  changeTitle = title =>  this.setState((prevState) => { return { searchTitle: title} })
+
+   handleChange = val =>  {
+    switch (val) {
+      case 1:
+      this.getData("https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc")
+      this.changeTitle("Most popular:")
+      break;
+      case 2: 
+      this.getData("https://api.themoviedb.org/3/movie/top_rated?") 
+      this.changeTitle("Top Rated:")
+      break;
+      case 3:
+      this.getData("https://api.themoviedb.org/3/movie/upcoming?&sort_by=release_date.asc")
+      this.changeTitle("Upcomming Films:")
+      break;
+      case 4:
+      this.getData("https://api.themoviedb.org/3/movie/now_playing?&sort_by=release_date.asc")
+      this.changeTitle("Now Playing:")
+      break;
+    }
+   }
+
     render() {
       return (
       <div>
@@ -73,7 +104,15 @@ class Home extends React.Component {
       </section>
       <section className="topResultBox">
         <div>
-        <h2>Most popular: </h2>
+        <h2> {this.state.searchTitle} </h2>
+      <ButtonToolbar>
+    <ToggleButtonGroup className="buttonToggle" type="radio" name="options" defaultValue={[1]} onChange={this.handleChange}>
+      <ToggleButton value={1}> Most Popular </ToggleButton>
+      <ToggleButton value={2}> Top Rated </ToggleButton>
+      <ToggleButton value={3}> Upcomming </ToggleButton>
+      <ToggleButton value={4}> Now Playing </ToggleButton>
+    </ToggleButtonGroup>
+  </ButtonToolbar>
           {this.state.render ? this.renderRes(this.state.films) : " " } 
           </div>
       </section>
