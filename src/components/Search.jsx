@@ -1,22 +1,29 @@
 import React from 'react';
 import InputGroup  from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
-import util from '../utilities'
 
-// <Route path="/search/:id"  component={ResultPage} /> 
-//send search params in event url as query string to result page component
-//why are you using input group and not form group?
-//onsubmit perhaps on formcontrol 
 
-const Search = () => (
-    <section className="searchBar"> 
+class Search  extends React.Component {
+
+  handleSubmit(e){
+    e.preventDefault()
+    window.location.replace(`http://localhost:3000/search/${e.target.userInput.value}`)
+  }
+
+  render() {
+    return (
+     <section className="searchBar"> 
+      <form  onSubmit={this.handleSubmit}>
     <InputGroup className="mb-3">
-     <InputGroup.Prepend>
+      <InputGroup.Prepend>
       <InputGroup.Text> Search movie by title </InputGroup.Text>
-     </InputGroup.Prepend>
-       <FormControl />
+      </InputGroup.Prepend>
+      <FormControl type="text" name="userInput"/>
     </InputGroup>
+    </form>
   </section>
-);
+      );
+    }
+}
 
 export default Search;
