@@ -36,6 +36,7 @@ class MoviePage extends React.Component {
      })();
   }
 
+  //render the film to page
   renderRes(film){
   return  (  
        <div>
@@ -65,8 +66,16 @@ class MoviePage extends React.Component {
     </div>)
   }
 
+  //add user fav to local storage, if not already present.
   userFav(filmId){
      let favoritesArray =  JSON.parse(localStorage.getItem("favorites"))
+
+    for (let i = 0; i < favoritesArray.length; i++) {
+       if(favoritesArray[i] === filmId){
+        return;
+       } 
+     }
+
      favoritesArray.push(filmId)
      localStorage.setItem('favorites', JSON.stringify(favoritesArray))
   }

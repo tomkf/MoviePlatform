@@ -5,7 +5,8 @@ import About from './About';
 import Discover from './Discover';
 import Favorites from './Favorites';
 import MyRated from './MyRated';
-import MoviePage from './MoviePage'
+import MoviePage from './MoviePage';
+import ResultPage from './ResultPage';
 
 class Controller extends React.Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class Controller extends React.Component {
 				<Route path="/favorites"> <Favorites /> </Route>
         <Route path="/ratings"> <MyRated /> </Route>
         <Route path="/movie/:id"  component={MoviePage} /> 
+        <Route path="/search/:id"  component={ResultPage} /> 
 	        	</div>
 	         </Router>
             </div>
