@@ -69,7 +69,7 @@ class Home extends React.Component {
      {film.overview}
     </Card.Text>
   </Card.Body>
-  <Button variant="primary"> <NavLink to={`/movie/${film.id}`} >  Click to find out more. </NavLink> </Button>
+   <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
 </Card>
      ));
     return (  <div className="titlesContainer"> { filmArr} </div>)

@@ -12,6 +12,11 @@ class Controller extends React.Component {
         super(props);
       }
 
+      componentDidMount(){
+        let favoritesArray = []
+        localStorage.setItem('favorites', JSON.stringify(favoritesArray))
+      }
+
       render(){
           return (
             <div> 

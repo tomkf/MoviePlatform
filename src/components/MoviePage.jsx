@@ -54,7 +54,7 @@ class MoviePage extends React.Component {
          </div>
          <h3> Overview: </h3>
          <p> {film.overview} </p>
-         <Button variant="primary" size="lg">
+         <Button variant="primary" size="lg"  onClick={this.userFav(this.props.match.params.id)}>
           Favorite this movie
         </Button>
        <Button variant="primary" size="lg">
@@ -64,6 +64,12 @@ class MoviePage extends React.Component {
 
        </div>
     </div>)
+  }
+
+  userFav(filmId){
+     let favoritesArray =  JSON.parse(localStorage.getItem("favorites"))
+     favoritesArray.push(filmId)
+     localStorage.setItem('favorites', JSON.stringify(favoritesArray))
   }
 
     render() {
