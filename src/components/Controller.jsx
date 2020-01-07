@@ -22,7 +22,7 @@ class Controller extends React.Component {
 				<Route path="/discover"> <Discover /> </Route>
 				<Route path="/favorites"> <Favorites /> </Route>
         <Route path="/ratings"> <MyRated /> </Route>
-        <Route exact path="/movie/:id"  /> } />
+        <Route path="/movie/:id"  component={MoviePage} /> 
 	        	</div>
 	         </Router>
             </div>
