@@ -32,7 +32,6 @@ class Home extends React.Component {
 
   //fetch top 12 from api
   getData(apiUrl){
-    console.log(apiUrl)
     let res = (async () => { let response = await fetch(`${apiUrl}&api_key=${util.token}&language=en-US&page=1`);
 
     if (response.ok) { 

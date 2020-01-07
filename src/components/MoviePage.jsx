@@ -29,7 +29,6 @@ class MoviePage extends React.Component {
 
     if (response.ok) { 
       let json = await response.json();
-      // this.retrunState(json.results)
       this.setState((prevState) => { return { film: json, render: true}})
     } else {
       alert("HTTP-Error: " + response.status);
