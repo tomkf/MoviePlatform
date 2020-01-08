@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from './Nav'
+import Form from 'react-bootstrap/Form'
 
 class Discover extends React.Component {
     render() {

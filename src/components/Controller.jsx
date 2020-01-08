@@ -14,8 +14,10 @@ class Controller extends React.Component {
       }
 
       componentDidMount(){
-        let favoritesArray = []
+        let favoritesArray = [];
+        let ratingsArray = [];
         localStorage.setItem('favorites', JSON.stringify(favoritesArray))
+        localStorage.setItem('ratings', JSON.stringify(ratingsArray))
       }
 
       render(){

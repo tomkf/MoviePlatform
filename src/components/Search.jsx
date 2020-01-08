@@ -7,7 +7,7 @@ class Search  extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    window.location.replace(`http://localhost:3000/search/${e.target.userInput.value}`)
+    window.location.replace(`/search/${e.target.userInput.value}`)
   }
 
   render() {

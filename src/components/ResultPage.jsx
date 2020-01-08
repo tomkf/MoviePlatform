@@ -9,8 +9,6 @@ import Button from 'react-bootstrap/Button'
 import util from '../utilities'
 import genericMovie from '../images/genericMovie.png'
 
-//query api like so //https://api.themoviedb.org/3/search/movie?api_key=${util.token}&query=cats
-//or &query=the+avengers
 
 class ResultPage extends React.Component {
     constructor(props) {
@@ -83,13 +81,11 @@ class ResultPage extends React.Component {
           <Nav></Nav>
           <div className="contentWrap">
               <Search></Search>
-          <h1>SEARCH RESULT</h1>
-
-          <div>
-          {this.state.render ?  this.renderRes(this.state.film) : "No matching search result, please try again." } 
-          </div>
-
-          </div>
+           <h1>SEARCH RESULT: </h1>
+           <div>
+             {this.state.render ?  this.renderRes(this.state.film) : "No matching search result, please try again." } 
+           </div>
+           </div>
           </div>
       }
 }
