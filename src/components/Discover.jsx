@@ -1,9 +1,13 @@
 import React from 'react';
 import Nav from './Nav'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import { Checkbox } from 'antd';
+import genericMovie from '../images/genericMovie.png'
+import { NavLink } from 'react-router-dom';
 import util from '../utilities'
+
+//bootstrap components
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button'
 
 
 const options = [
@@ -34,20 +38,18 @@ class Discover extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gnereQuery: []
+      render: false,
+      films: null
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onChange(checkedValues) {
+  //grab checkbox values 
+  onSelect(checkedValues) {
     storage = checkedValues
-    console.log(storage)
-    // this.setState((prevState) => { return { gnereQuery: checkedValues}})
-    // this.setState((prevState) => { return { gnereQuery: query} })
-    // this.setState({
-    //   gnereQuery: [...this.state.gnereQuery, query]
-    // })
   }
 
+  //grab user inputs, build query string
   handleSubmit(e){
     e.preventDefault()
     let year = e.target.year.value
@@ -65,10 +67,50 @@ class Discover extends React.Component {
     apiQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${util.token}&language=en-US&sort_by=popularity.desc&page=1&primary_release_year=${year}`
     }
 
-    console.log(apiQuery)
+     this.callApi(apiQuery)
   }
 
+  callApi(query){
+     let res = (async () => { let response = await fetch(query);
+
+     if (response.ok) { 
+       let json = await response.json();
+       this.retrunState(json.results)
+     } else {
+       alert("HTTP-Error: " + response.status);
+     }
+      })();
+  }
+
+  //pass top 12 API results to state
+  retrunState(json){
+    let workingState = [];
   
+      for(let i = 0; i < 12; i++){
+        workingState.push(json[i])
+      }
+      this.setState((prevState) => { return { films: workingState, render: true}})
+    }
+  
+
+  //render results to view
+  renderFilms(items){
+    let filmArr =  items.map(film =>  ( 
+  <Card bg="light" style={{ width: '20rem' }} className="filmCard" >
+  <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
+  <Card.Body>
+    <Card.Title> {film.title} </Card.Title> 
+    <Card.Subtitle className="rating"> Users Rating: {film.vote_average * 10} % </Card.Subtitle>
+    <Card.Subtitle className="rating"> {util.parseDate(film.release_date)} </Card.Subtitle>
+    <Card.Text>
+     {film.overview}
+    </Card.Text>
+  </Card.Body>
+   <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
+</Card>
+     ));
+    return (  <div className="titlesContainer"> { filmArr} </div>)
+  }
 
     render() {
       return <div>
@@ -77,10 +119,13 @@ class Discover extends React.Component {
         <h1>Discover</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
-    <Checkbox.Group options={options}  onChange={this.onChange} />
+    <Checkbox.Group options={options}  onChange={this.onSelect} />
     <input type="text" label="Year of release" name="year"/>
     </form>
    </div>
+       <div> 
+         {this.state.render ? this.renderFilms(this.state.films) : " "}
+       </div>
         </div>
         </div>
     }
