@@ -3,26 +3,29 @@ import Nav from './Nav'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Checkbox } from 'antd';
+import util from '../utilities'
+
 
 const options = [
-  { label: 'Action', value: 'action' },
-  { label: 'Adventure', value: 'adventure' },
-  { label: 'Animation', value: 'animation' },
-  { label: 'Comedy', value: 'comedy' },
-  { label: 'Crime', value: 'crime' },
-  { label: 'Documentary', value: 'documentary' },
-  { label: 'Drama', value: 'drama' },
-  { label: 'Family', value: 'family' },
-  { label: 'Fantasy', value: 'fantasy' },
-  { label: 'History', value: 'history' },
-  { label: 'Horror', value: 'horror' },
-  { label: 'Music', value: 'music' },
-  { label: 'Romance', value: 'romance' },
-  { label: 'Science Fiction', value: 'science+fiction' },
-  { label: 'TV Movie', value: 'tv+movie' },
-  { label: 'Thriller', value: 'triller' },
-  { label: 'War', value: 'war' },
-  { label: 'Western', value: 'western' }
+  { label: 'Action', value: '28' },
+  { label: 'Adventure', value: '12' },
+  { label: 'Animation', value: '16' },
+  { label: 'Comedy', value: '35' },
+  { label: 'Crime', value: '80' },
+  { label: 'Documentary', value: '99' },
+  { label: 'Drama', value: '18' },
+  { label: 'Family', value: '10751' },
+  { label: 'Fantasy', value: '14' },
+  { label: 'History', value: '36' },
+  { label: 'Horror', value: '27' },
+  { label: 'Music', value: '10402' },
+  { label: 'Mystery', value: '9648' },
+  { label: 'Romance', value: '10749' },
+  { label: 'Science Fiction', value: '878' },
+  { label: 'TV Movie', value: '10770' },
+  { label: 'Thriller', value: '53' },
+  { label: 'War', value: '10752' },
+  { label: 'Western', value: '37' }
 ];
 
 let storage = []
@@ -48,7 +51,21 @@ class Discover extends React.Component {
   handleSubmit(e){
     e.preventDefault()
     let year = e.target.year.value
-    console.log(year, storage)
+    let genreQuery = ""
+    let apiQuery = ""
+
+    if (storage.length > 1){
+      storage.forEach(genre => {
+        genreQuery += genre += ","
+      })
+      apiQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${util.token}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genreQuery.slice(0, -1)}&primary_release_year=${year}`
+    } else if (storage.length === 1) {
+      apiQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${util.token}&language=en-US&sort_by=popularity.desc&page=1&with_genres=${storage[0]}&primary_release_year=${year}`
+    } else {
+    apiQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${util.token}&language=en-US&sort_by=popularity.desc&page=1&primary_release_year=${year}`
+    }
+
+    console.log(apiQuery)
   }
 
   
