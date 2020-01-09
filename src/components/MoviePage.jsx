@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav'
 import Search from './Search'
+import RatingModal from './RatingModal'
 
 //bootstrap components
 import Button from 'react-bootstrap/Button'
@@ -15,7 +16,8 @@ class MoviePage extends React.Component {
     super(props);
     this.state = {
       film: null,
-      render: false
+      render: false,
+      openWindow: false
     }
   }  
 
@@ -57,7 +59,7 @@ class MoviePage extends React.Component {
          <Button variant="primary" size="lg"  onClick={this.userFav(this.props.match.params.id)}>
           Favorite this movie
         </Button>
-       <Button variant="primary" size="lg">
+       <Button variant="primary" size="lg" onClick={this.openModal}>
          Rate this movie
       </Button>
          </div>
@@ -79,6 +81,16 @@ class MoviePage extends React.Component {
      favoritesArray.push(filmId)
      localStorage.setItem('favorites', JSON.stringify(favoritesArray))
   }
+  
+
+    openModal = _ =>{
+      this.setState((prevState) => { return { openWindow: true}})
+    }
+
+
+    closeModal = _ => {
+      this.setState((prevState) => { return { openWindow: false}})
+    }
 
     render() {
       return (
@@ -88,6 +100,7 @@ class MoviePage extends React.Component {
         <Search></Search>
            <div> 
              {this.state.render ?  this.renderRes(this.state.film) : " " } 
+             {this.state.openWindow ?  <RatingModal openWindow={this.state.openWindow} closeModal={this.closeModal}/> : "" }
            </div>
         </div>
       </div>
