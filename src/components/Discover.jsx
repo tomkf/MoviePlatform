@@ -8,6 +8,9 @@ import util from '../utilities'
 //bootstrap components
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 
 const options = [
@@ -39,15 +42,18 @@ class Discover extends React.Component {
     super(props);
     this.state = {
       render: false,
-      films: null
+      films: null,
+      searchTitle: "Most Popular:"
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  
   //grab checkbox values 
   onSelect(checkedValues) {
     storage = checkedValues
   }
+
 
   //grab user inputs, build query string
   handleSubmit(e){
@@ -70,6 +76,7 @@ class Discover extends React.Component {
      this.callApi(apiQuery)
   }
 
+
   callApi(query){
      let res = (async () => { let response = await fetch(query);
 
@@ -81,6 +88,7 @@ class Discover extends React.Component {
      }
       })();
   }
+
 
   //pass top 12 API results to state
   retrunState(json){
@@ -95,6 +103,7 @@ class Discover extends React.Component {
 
   //render results to view
   renderFilms(items){
+    console.log(this.state)
     let filmArr =  items.map(film =>  ( 
   <Card bg="light" style={{ width: '20rem' }} className="filmCard" >
   <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
@@ -109,8 +118,30 @@ class Discover extends React.Component {
    <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
 </Card>
      ));
-    return (  <div className="titlesContainer"> { filmArr} </div>)
+    return (  <div> <h3> {this.state.searchTitle} </h3>  <div className="titlesContainer">  { filmArr} </div> </div>)
   }
+
+
+  sortResult = val =>  {
+    switch (val) {
+      case 1:
+        this.state.films.sort((a,b) => (a.popularity < b.popularity) ? 1 : ((b.popularity < a.popularity) ? -1 : 0))
+        this.changeTitle("Most popular:")
+      break;
+      case 2: 
+      this.state.films.sort((a,b) => (a.release_date > b.release_date) ? 1 : ((b.release_date > a.release_date) ? -1 : 0))
+      this.changeTitle("Release Date:")
+      break;
+      case 3:
+        this.state.films.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+      this.changeTitle("Results:")
+      break;
+    }
+   }
+
+
+   changeTitle = title =>  this.setState((prevState) => { return { searchTitle: title} })
+
 
     render() {
       return <div>
@@ -123,8 +154,15 @@ class Discover extends React.Component {
     <input type="text" label="Year of release" name="year"/>
     </form>
    </div>
-       <div> 
+       <div className="topResultBox"> 
          {this.state.render ? this.renderFilms(this.state.films) : " "}
+         {this.state.render ?  <div> <h3> Sort By: </h3> <ButtonToolbar>
+    <ToggleButtonGroup className="buttonToggle" type="radio" name="options" defaultValue={[1]} onChange={this.sortResult}>
+      <ToggleButton value={1}> Rating </ToggleButton>
+      <ToggleButton value={2}> Release Date </ToggleButton>
+      <ToggleButton value={3}> Title </ToggleButton>
+    </ToggleButtonGroup>
+  </ButtonToolbar> </div> : ""}
        </div>
         </div>
         </div>
