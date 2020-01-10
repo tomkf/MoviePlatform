@@ -100,7 +100,7 @@ class MoviePage extends React.Component {
         <Search></Search>
            <div> 
              {this.state.render ?  this.renderRes(this.state.film) : " " } 
-             {this.state.openWindow ?  <RatingModal openWindow={this.state.openWindow} closeModal={this.closeModal}/> : "" }
+             {this.state.openWindow ?  <RatingModal openWindow={this.state.openWindow} filmId={this.props.match.params.id} closeModal={this.closeModal}/> : "" }
            </div>
         </div>
       </div>

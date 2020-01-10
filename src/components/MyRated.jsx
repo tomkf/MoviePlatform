@@ -34,7 +34,7 @@ class MyRated extends React.Component {
 
   //make API call for each movie ID
   passApiData(filmIDArray){
-    filmIDArray.forEach(element => this.callApi(element));
+    filmIDArray.forEach(element => this.callApi(element.filmId));
   }
 
 
