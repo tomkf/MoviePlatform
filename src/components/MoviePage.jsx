@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './Nav'
 import Search from './Search'
 import RatingModal from './RatingModal'
+import { NavLink } from 'react-router-dom';
 
 //bootstrap components
 import Button from 'react-bootstrap/Button'
@@ -99,6 +100,7 @@ class MoviePage extends React.Component {
              {this.state.render ?  this.renderRes(this.state.film) : " " } 
              {this.state.openWindow ?  <RatingModal openWindow={this.state.openWindow} filmId={this.props.match.params.id} closeModal={this.closeModal}/> : "" }
            </div>
+          <span><NavLink to="/" exact>Back Home</NavLink></span>
         </div>
       </div>
       )

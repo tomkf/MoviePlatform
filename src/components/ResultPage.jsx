@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav'
 import Search from './Search'
+import { NavLink } from 'react-router-dom';
 
 //bootstrap components
 import Button from 'react-bootstrap/Button'
@@ -71,6 +72,7 @@ class ResultPage extends React.Component {
              </div>
              <h3> Overview: </h3>
              <p> {film.overview} </p>
+             <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
              </div>
            </div>
         </div>)
@@ -85,6 +87,7 @@ class ResultPage extends React.Component {
            <div>
              {this.state.render ?  this.renderRes(this.state.film) : "No matching search result, please try again." } 
            </div>
+           <span><NavLink to="/" exact>Back Home</NavLink></span>
            </div>
           </div>
       }
