@@ -53,9 +53,7 @@ class RatingModal extends React.Component {
              onStarClick={this.onStarClick.bind(this)}
              />
 
-
             <button onClick={this.props.closeModal}> Cancel </button>
-
              </ReactModal> 
              </div> 
              )

@@ -3,6 +3,8 @@ import Nav from './Nav'
 import { NavLink } from 'react-router-dom';
 import genericMovie from '../images/genericMovie.png'
 import Search from './Search'
+import StarRatingComponent from 'react-star-rating-component';
+
 
 //bootstrap 
 import Card from 'react-bootstrap/Card';
@@ -34,16 +36,16 @@ class MyRated extends React.Component {
 
   //make API call for each movie ID
   passApiData(filmIDArray){
-    filmIDArray.forEach(element => this.callApi(element.filmId));
+    filmIDArray.forEach(element => this.callApi(element.filmId, element.rating));
   }
 
 
   //pass  each API call to state
-  callApi(movieId){
+  callApi(movieId, rating){
     let res = (async () => { let response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${util.token}&language=en-US`);
-
     if (response.ok) { 
       let filmJson = await response.json();
+      filmJson.userRating = rating
       let filmArray = this.state.ratings.concat(filmJson);
       this.setState({ ratings: filmArray })
     } else {
@@ -65,11 +67,21 @@ class MyRated extends React.Component {
          {film.overview}
         </Card.Text>
       </Card.Body>
-       <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
+      <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
+       <Card.Footer>
+      <span className="text-muted"> Your rating:  <StarRatingComponent 
+          name="rate2" 
+          editing={false}
+          renderStarIcon={() => <span> ⭐ </span>}
+          starCount={5}
+          value={film.userRating}
+        />   </span>
+    </Card.Footer>
     </Card>
          ));
         return (  <div className="titlesContainer"> { filmArr} </div>)
   }
+
 
     render() {
       return( <div>
@@ -77,7 +89,7 @@ class MyRated extends React.Component {
         <div className="contentWrap"> 
         <Search></Search>
         <h1>Favorites</h1>
-        {this.state.rateId != null ? this.renderItems(this.state.ratings) : <h1> Sorry you have not rated any films </h1> }
+        {this.state.rateId != null ? this.renderItems(this.state.ratings) : <h1> Sorry you have no rated movies. Search for a movie to add to your favourites </h1> }
         </div>
         </div>
       )
