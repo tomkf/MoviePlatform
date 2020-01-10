@@ -56,7 +56,7 @@ class MoviePage extends React.Component {
          </div>
          <h3> Overview: </h3>
          <p> {film.overview} </p>
-         <Button variant="primary" size="lg"  onClick={this.userFav(this.props.match.params.id)}>
+         <Button variant="primary" size="lg" id="fav" onClick={ () => {this.userFav(this.props.match.params.id)}}>
           Favorite this movie
         </Button>
        <Button variant="primary" size="lg" onClick={this.openModal}>
@@ -83,14 +83,11 @@ class MoviePage extends React.Component {
   }
   
 
-    openModal = _ =>{
-      this.setState((prevState) => { return { openWindow: true}})
-    }
+    openModal = _ => this.setState((prevState) => { return { openWindow: true}})
+    
 
-
-    closeModal = _ => {
-      this.setState((prevState) => { return { openWindow: false}})
-    }
+    closeModal = _ => this.setState((prevState) => { return { openWindow: false}})
+    
 
     render() {
       return (

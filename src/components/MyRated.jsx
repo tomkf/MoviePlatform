@@ -73,7 +73,7 @@ class MyRated extends React.Component {
           name="rate2" 
           editing={false}
           renderStarIcon={() => <span> ⭐ </span>}
-          starCount={5}
+          starCount={film.userRating}
           value={film.userRating}
         />   </span>
     </Card.Footer>

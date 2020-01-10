@@ -8,7 +8,6 @@ import StarRatingComponent from 'react-star-rating-component';
 class RatingModal extends React.Component {
   constructor() {
     super();
- 
     this.state = {
       rating: 0
     };
@@ -24,6 +23,7 @@ class RatingModal extends React.Component {
     for (let i = 0; i < ratingsArray.length; i++) {
       if(ratingsArray[i].filmId === filmId){
         ratingsArray[i].rating = rating
+        this.props.closeModal()
         return localStorage.setItem('ratings', JSON.stringify(ratingsArray))
       } 
     }
