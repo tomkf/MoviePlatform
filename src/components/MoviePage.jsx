@@ -64,7 +64,6 @@ class MoviePage extends React.Component {
          Rate this movie
       </Button>
          </div>
-
        </div>
     </div>)
   }
