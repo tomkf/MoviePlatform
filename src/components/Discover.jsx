@@ -119,7 +119,7 @@ class Discover extends React.Component {
    <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
 </Card>
      ));
-  return (  <div> <div> <h3> {this.state.searchTitle} </h3>  <Button onClick={ () => this.customSort(this.state.customSort)}> {this.state.customSort} </Button>  </div> <div className="titlesContainer">  { filmArr} </div> </div>)
+  return (  <div>  <h3> {this.state.searchTitle} </h3> <div className="titlesContainer">  { filmArr} </div>  <Button onClick={ () => this.customSort(this.state.customSort)}> {this.state.customSort} </Button> </div>)
   }
 
 
@@ -198,14 +198,15 @@ customSort = val => {
     </form>
    </div>
        <div className="topResultBox"> 
-         {this.state.render ? this.renderFilms(this.state.films) : " "}
          {this.state.render ?  <div> <h3> Sort By: </h3> <ButtonToolbar>
     <ToggleButtonGroup className="buttonToggle" type="radio" name="options" defaultValue={[1]} onChange={this.sortResult}>
       <ToggleButton value={1}> Rating </ToggleButton>
       <ToggleButton value={2}> Release Date </ToggleButton>
       <ToggleButton value={3}> Title </ToggleButton>
     </ToggleButtonGroup>
-  </ButtonToolbar> </div> : ""}
+  </ButtonToolbar> 
+  {this.state.render ? this.renderFilms(this.state.films) : " "}
+  </div> : ""}
        </div>
         </div>
         </div>
