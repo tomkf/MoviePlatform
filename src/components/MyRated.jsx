@@ -88,7 +88,7 @@ class MyRated extends React.Component {
         <Nav></Nav>
         <div className="contentWrap"> 
         <Search></Search>
-        <h1>Favorites</h1>
+        <h1>Your Ratings: </h1>
         {this.state.rateId != null ? this.renderItems(this.state.ratings) : <h1> Sorry you have no rated movies. Search for a movie to add to your favourites </h1> }
         </div>
         </div>

@@ -90,11 +90,11 @@ class Home extends React.Component {
       this.changeTitle("Top Rated:")
       break;
       case 3:
-      this.getData("https://api.themoviedb.org/3/movie/upcoming?&sort_by=release_date.asc")
+      this.getData("https://api.themoviedb.org/3/movie/upcoming?&sort_by=primary_release_date.desc")
       this.changeTitle("Upcomming Films:")
       break;
       case 4:
-      this.getData("https://api.themoviedb.org/3/movie/now_playing?&sort_by=release_date.asc")
+      this.getData("https://api.themoviedb.org/3/movie/now_playing?&primary_release_date.desc")
       this.changeTitle("Now Playing:")
       break;
     }

@@ -43,7 +43,9 @@ class Discover extends React.Component {
     this.state = {
       render: false,
       films: null,
-      searchTitle: "Most Popular:"
+      searchTitle: "Most Popular:",
+      customSort: "Highest/Lowest Rating",
+      customToggle: {"a": false, "b": false, "c": false}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -103,7 +105,6 @@ class Discover extends React.Component {
 
   //render results to view
   renderFilms(items){
-    console.log(this.state)
     let filmArr =  items.map(film =>  ( 
   <Card bg="light" style={{ width: '20rem' }} className="filmCard" >
   <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
@@ -118,29 +119,71 @@ class Discover extends React.Component {
    <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
 </Card>
      ));
-    return (  <div> <h3> {this.state.searchTitle} </h3>  <div className="titlesContainer">  { filmArr} </div> </div>)
+  return (  <div> <div> <h3> {this.state.searchTitle} </h3>  <Button onClick={ () => this.customSort(this.state.customSort)}> {this.state.customSort} </Button>  </div> <div className="titlesContainer">  { filmArr} </div> </div>)
+  }
+
+
+customSort = val => {
+  switch (val) {
+    case "Highest/Lowest Rating":
+      if (this.state.customToggle.a === false){
+        this.state.films.sort((a,b) => (b.vote_average < a.vote_average) ? 1 : ((a.vote_average < b.vote_average) ? -1 : 0))
+        this.toggleState("a", true)
+      } else {
+        this.state.films.sort((a,b) => (a.vote_average < b.vote_average) ? 1 : ((b.vote_average < a.vote_average) ? -1 : 0))
+        this.toggleState("a", false)
+      }
+    
+    break 
+    case "Oldest/Newest":
+      if (this.state.customToggle.b === false){
+        this.state.films.sort((a,b) => (b.release_date > a.release_date) ? 1 : ((a.release_date > b.release_date) ? -1 : 0))
+        this.toggleState("b", true)
+      } else {
+        this.state.films.sort((a,b) => (a.release_date > b.release_date) ? 1 : ((b.release_date > a.release_date) ? -1 : 0))
+        this.toggleState("b", false)
+      }
+    break 
+    case "A-Z / Z-A":
+      if (this.state.customToggle.c === false){
+        this.state.films.sort((a,b) => (b.title > a.title) ? 1 : ((a.title > b.title) ? -1 : 0))
+        this.toggleState("c", true)
+      } else {
+        this.state.films.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
+        this.toggleState("c", false)
+      }
+    break 
+  }
+}
+
+
+  //toggle for custom switch
+  toggleState = (key, val) => {
+    this.setState({
+      customToggle : {...this.state.customToggle, [key]: val }
+  })
   }
 
 
   sortResult = val =>  {
     switch (val) {
       case 1:
-        this.state.films.sort((a,b) => (a.popularity < b.popularity) ? 1 : ((b.popularity < a.popularity) ? -1 : 0))
-        this.changeTitle("Most popular:")
+        this.state.films.sort((a,b) => (a.vote_average < b.vote_average) ? 1 : ((b.vote_average < a.vote_average) ? -1 : 0))
+        this.changeTitle("Most popular:", "Highest/Lowest Rating")
       break;
       case 2: 
       this.state.films.sort((a,b) => (a.release_date > b.release_date) ? 1 : ((b.release_date > a.release_date) ? -1 : 0))
-      this.changeTitle("Release Date:")
+      this.changeTitle("Release Date:", "Oldest/Newest")
       break;
       case 3:
         this.state.films.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0))
-      this.changeTitle("Results:")
+      this.changeTitle("Results:", "A-Z / Z-A")
       break;
     }
    }
 
 
-   changeTitle = title =>  this.setState((prevState) => { return { searchTitle: title} })
+   changeTitle = (title, subtitle) =>  this.setState((prevState) => { return { searchTitle: title, customSort: subtitle} })
 
 
     render() {
