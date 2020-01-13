@@ -1,6 +1,5 @@
 import React from 'react';
 import Nav from './Nav'
-import { Checkbox } from 'antd';
 import genericMovie from '../images/genericMovie.png'
 import { NavLink } from 'react-router-dom';
 import util from '../utilities'
@@ -12,6 +11,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
+import { Checkbox } from 'antd';
 
 const options = [
   { label: 'Action', value: '28' },
@@ -36,6 +36,7 @@ const options = [
 ];
 
 let storage = []
+
 
 class Discover extends React.Component {
   constructor(props) {

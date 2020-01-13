@@ -3,12 +3,11 @@ import Nav from './Nav'
 import { NavLink } from 'react-router-dom';
 import genericMovie from '../images/genericMovie.png'
 import Search from './Search'
-import StarRatingComponent from 'react-star-rating-component';
-
 
 //bootstrap 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
+import StarRatingComponent from 'react-star-rating-component';
 
 //utilities
 import util from '../utilities'
