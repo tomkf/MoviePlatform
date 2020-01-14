@@ -82,8 +82,8 @@ class ResultPage extends React.Component {
         return <div>
           <Nav></Nav>
           <div className="contentWrap">
+          <h1>SEARCH RESULT: </h1>
               <Search></Search>
-           <h1>SEARCH RESULT: </h1>
            <div>
              {this.state.render ?  this.renderRes(this.state.film) : "No matching search result, please try again." } 
            </div>

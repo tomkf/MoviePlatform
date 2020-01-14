@@ -65,10 +65,10 @@ class Favorites extends React.Component {
          {film.overview}
         </Card.Text>
       </Card.Body>
-       <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
+       <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button> </NavLink> 
     </Card>
          ));
-        return (  <div className="titlesContainer"> { filmArr} </div>)
+        return (  <div className="favBox"> { filmArr} </div>)
   }
 
 
@@ -76,8 +76,8 @@ class Favorites extends React.Component {
       return( <div>
         <Nav></Nav>
         <div className="contentWrap"> 
-        <Search></Search>
         <h1>Favorites</h1>
+        <Search></Search>
         {this.state.favId != null ? this.renderItems(this.state.favorites) : <h1> Sorry you have no favorites </h1> }
         </div>
         </div>

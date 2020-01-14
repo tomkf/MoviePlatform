@@ -78,7 +78,7 @@ class MyRated extends React.Component {
     </Card.Footer>
     </Card>
          ));
-        return (  <div className="titlesContainer"> { filmArr} </div>)
+        return (  <div className="favBox"> { filmArr} </div>)
   }
 
 
@@ -86,8 +86,8 @@ class MyRated extends React.Component {
       return( <div>
         <Nav></Nav>
         <div className="contentWrap"> 
-        <Search></Search>
         <h1>Your Ratings: </h1>
+        <Search></Search>
         {this.state.rateId != null ? this.renderItems(this.state.ratings) : <h1> Sorry you have no rated movies. Search for a movie to add to your favourites </h1> }
         </div>
         </div>
