@@ -1,8 +1,9 @@
+<h1> Getting Started: </h1>
+1: Clone the repository into a working directory, cd into it and run the command "npm build"
+2: Run the command "serve -s build" to start the project's build server.
+3: Visit the project at http://localhost:5000 in your browser.
 
-serve -s build
-http://localhost:5000
-
-
+Note: if you experience a browser alert informing you of an HTTP error, it is likely due to the API token exceeding it's rate, go to file "utilities.js" in the src folder and replace the token variable with your own to resolve this problem.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
