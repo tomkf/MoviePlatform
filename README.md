@@ -10,6 +10,10 @@
 <p> Note: if you experience a browser alert informing you of an HTTP error, it is likely due to the API token exceeding it's rate, go to file "utilities.js" in the src folder and replace the token variable with your own to resolve this problem. </p>
 
 
+
+
+
+<br/>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
