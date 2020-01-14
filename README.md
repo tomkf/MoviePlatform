@@ -5,7 +5,7 @@
   
  <h3>  To run development server: </h3>
   <ul>
-<li> 2: Run the command "npm start" to start the project's build server. </li>
+<li> 2: Run the command "npm start" to start the project's development server. </li>
 <li> 3: Visit the project at http://localhost:3000/ in your browser. </li>
 </ul>
 
