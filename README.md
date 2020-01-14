@@ -1,3 +1,10 @@
+
+serve -s build
+http://localhost:5000
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
