@@ -50,3 +50,55 @@
         margin-bottom: 4%;
     }
 }
+
+
+.indivMov{
+display: flex;
+justify-content: center;
+
+.filmCard{
+    margin-bottom: 8%;
+
+    .rating{
+        margin-bottom: 5%;
+    }
+
+    .tip{ 
+        margin-left: 4%;
+        margin-bottom: 4%;
+    }
+
+    Button{
+        margin-bottom: 2%;
+        margin-left: 2%;
+    }
+}
+}
+
+
+.aboutTag{
+    margin-top: 18%;
+    margin-left: 2%;
+    h1{
+        margin-bottom: 6%;
+    }
+
+    img{
+        height: 86px;
+        margin-bottom: 4%;
+    }
+}
+
+
+.checkBox{
+
+    h5{
+        margin-top: 2%;
+        text-decoration: underline;
+    }
+
+    .check{
+        display: grid;
+        grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    }
+}

@@ -76,7 +76,7 @@ class Favorites extends React.Component {
       return( <div>
         <Nav></Nav>
         <div className="contentWrap"> 
-        <h1>Favorites</h1>
+        <h1>Favorites: </h1>
         <Search></Search>
         {this.state.favId != null ? this.renderItems(this.state.favorites) : <h1> Sorry you have no favorites </h1> }
         </div>

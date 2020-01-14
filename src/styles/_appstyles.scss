@@ -7,3 +7,21 @@
 .searchBar{
     margin: 2%;
 }
+
+h1{
+    text-decoration: underline;
+}
+
+
+.inserStar{
+    display: flex;
+    justify-content: center;
+
+    i{
+        font-size: 120px;
+    }
+}
+
+.modalCancel{
+    width: 188px;
+}

@@ -12,6 +12,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 import { Checkbox } from 'antd';
+//docs: https://ant.design/components/checkbox/
 
 const options = [
   { label: 'Action', value: '28' },
@@ -46,7 +47,8 @@ class Discover extends React.Component {
       films: null,
       searchTitle: "Most Popular:",
       customSort: "Highest/Lowest Rating",
-      customToggle: {"a": false, "b": false, "c": false}
+      customToggle: {"a": false, "b": false, "c": false},
+      renderFalse: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -85,7 +87,12 @@ class Discover extends React.Component {
 
      if (response.ok) { 
        let json = await response.json();
-       this.retrunState(json.results)
+       if (json.results.length === 0){
+         this.retrunState(false)
+       }  else if(json.results.length > 0) {
+         console.log(json.results.length)
+          this.retrunState(json.results)
+       }
      } else {
        alert("HTTP-Error: " + response.status);
      }
@@ -95,13 +102,17 @@ class Discover extends React.Component {
 
   //pass top 12 API results to state
   retrunState(json){
+    if (json === false){
+     return this.setState((prevState) => { return { renderFalse: true, render: false, films: null}})
+    } else {
     let workingState = [];
   
       for(let i = 0; i < 12; i++){
         workingState.push(json[i])
       }
-      this.setState((prevState) => { return { films: workingState, render: true}})
+    return  this.setState((prevState) => { return { films: workingState, render: true, renderFalse: false}})
     }
+  }
   
 
   //render results to view
@@ -191,11 +202,13 @@ customSort = val => {
       return <div>
         <Nav></Nav>
         <div className="contentWrap"> 
-        <h1>Discover</h1>
-        <div>
+        <h1>Discover: </h1>
+        <div className="checkBox">
           <form onSubmit={this.handleSubmit}>
-    <Checkbox.Group options={options}  onChange={this.onSelect} />
-    <input type="text" label="Year of release" name="year"/>
+            <h5> Genere: </h5>
+    <Checkbox.Group className="check" options={options}  onChange={this.onSelect} />
+    <h5>Year of release: </h5>
+    <input type="text" name="year"/>
     </form>
    </div>
        <div className="topResultBox"> 
@@ -206,6 +219,7 @@ customSort = val => {
       <ToggleButton value={3}> Title </ToggleButton>
     </ToggleButtonGroup>
   </ButtonToolbar> 
+  {this.state.renderFalse ? "No matching search result, please try something else." : " "}
   {this.state.render ? this.renderFilms(this.state.films) : " "}
   </div> : ""}
        </div>

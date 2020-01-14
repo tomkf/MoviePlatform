@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 //bootstrap components
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card';
 
 //utilities
 import util from '../utilities'
@@ -41,32 +42,34 @@ class MoviePage extends React.Component {
 
   //render the film to page
   renderRes(film){
-  return  (  
-       <div>
-       <div className="movieCard"> 
 
-         <div className="moviePoster">
-           <img  src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
-         </div>
+    let filmArr = []
+    filmArr.push(film)
+   return this.filmCard(filmArr)
+  }
 
-         <div className="movieContent"> 
-         <div className="movieBanner"> 
-          <h2> {film.original_title} </h2> 
-          <h3> {util.parseDate(film.release_date)} </h3>
-          <h3> User's Ratings: {film.vote_average * 10} % </h3>
-         </div>
-         <h3> Overview: </h3>
-         <p> {film.overview} </p>
+
+  filmCard(filmArray){
+    return filmArray.map(film =>  ( 
+       <Card bg="light" style={{ width: '20rem' }} className="filmCard" >
+       <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
+       <Card.Body>
+         <Card.Title> {film.title} </Card.Title> 
+         <Card.Subtitle className="rating"> Users Rating: {film.vote_average * 10} % </Card.Subtitle>
+         <Card.Subtitle className="rating"> {util.parseDate(film.release_date)} </Card.Subtitle>
+         <Card.Text>
+          {film.overview}
+         </Card.Text>
          <Button variant="primary" size="lg" id="fav" onClick={ () => {this.userFav(this.props.match.params.id)}}>
           Favorite this movie
         </Button>
        <Button variant="primary" size="lg" onClick={this.openModal}>
          Rate this movie
       </Button>
-         </div>
-       </div>
-    </div>)
-  }
+       </Card.Body>
+     </Card>
+          ));
+   }
 
   //add user fav to local storage, if not already present.
   userFav(filmId){
@@ -95,7 +98,7 @@ class MoviePage extends React.Component {
         <Nav></Nav>
         <div className="contentWrap"> 
         <Search></Search>
-           <div> 
+           <div className="indivMov">  
              {this.state.render ?  this.renderRes(this.state.film) : " " } 
              {this.state.openWindow ?  <RatingModal openWindow={this.state.openWindow} filmId={this.props.match.params.id} closeModal={this.closeModal}/> : "" }
            </div>

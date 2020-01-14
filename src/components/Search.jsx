@@ -16,7 +16,7 @@ class Search  extends React.Component {
       <form  onSubmit={this.handleSubmit}>
     <InputGroup className="mb-3">
       <InputGroup.Prepend>
-      <InputGroup.Text> Search movie by title </InputGroup.Text>
+      <InputGroup.Text> Search movie by title: </InputGroup.Text>
       </InputGroup.Prepend>
       <FormControl type="text" name="userInput"/>
     </InputGroup>

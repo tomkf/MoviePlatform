@@ -46,14 +46,17 @@ class RatingModal extends React.Component {
              <div> <ReactModal isOpen={this.props.openWindow}  style={{ overlay: {backgroundColor: "rgb(102, 120, 156)", margin: "6%", marginTop: "12%", borderRadius: "10px", zIndex: "10"}, content: { width: "82vw"} } } > 
             <h2>Rate this movie: </h2>
 
+            <div className="inserStar">
             <StarRatingComponent 
+            className="userStar"
              name="rate1" 
              starCount={5}
              value={this.state.rating}
              onStarClick={this.onStarClick.bind(this)}
              />
+             </div>
 
-            <button onClick={this.props.closeModal}> Cancel </button>
+            <button className="modalCancel" onClick={this.props.closeModal}> Cancel </button>
              </ReactModal> 
              </div> 
              )

@@ -109,10 +109,10 @@ class ResultPage extends React.Component {
         return <div>
           <Nav></Nav>
           <div className="contentWrap">
-          <h1>SEARCH RESULT: </h1>
+          <h1>Your Result: </h1>
               <Search></Search>
            <div>
-             {this.state.render ?  this.renderRes(this.state.films) : "No matching search result, please try again." } 
+             {this.state.render ?  this.renderRes(this.state.films) : "No matching search result, please try something else." } 
            </div>
            <span><NavLink to="/" exact>Back Home</NavLink></span>
            </div>
