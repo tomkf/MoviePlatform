@@ -220,7 +220,7 @@ customSort = val => {
     </ToggleButtonGroup>
   </ButtonToolbar> 
   {this.state.renderFalse ? "No matching search result, please try something else." : " "}
-  {this.state.render ? this.renderFilms(this.state.films) : " "}
+  {this.state.render ? this.renderFilms(this.state.films) : "No matching search result, please try something else."}
   </div> : ""}
        </div>
         </div>
