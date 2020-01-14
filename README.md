@@ -1,7 +1,7 @@
 <h1> Getting Started: </h1>
 
 <ul>
-<li>1: Clone the repository into a working directory, cd into it and run the command "npm build" </li>
+<li>1: Clone the repository into a working directory, cd into it and run the command "npm install" </li>
 <li> 2: Run the command "serve -s build" to start the project's build server. </li>
 <li> 3: Visit the project at http://localhost:5000 in your browser. </li>
 </ul>
