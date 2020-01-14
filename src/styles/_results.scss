@@ -1,0 +1,52 @@
+.favBox{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    margin-left: 4%;
+
+    .filmCard{
+        margin-bottom: 8%;
+
+        .rating{
+            margin-bottom: 5%;
+        }
+
+        .tip{ 
+            margin-left: 4%;
+            margin-bottom: 4%;
+        }
+
+        Button{
+            margin-bottom: 2%;
+            margin-left: 2%;
+        }
+    }
+}
+
+
+.resultHeader{
+    margin-left: 4%;
+
+    .filmCard{
+        margin-bottom: 8%;
+
+        .rating{
+            margin-bottom: 5%;
+        }
+
+        .tip{ 
+            margin-left: 4%;
+            margin-bottom: 4%;
+        }
+
+        Button{
+            margin-bottom: 2%;
+            margin-left: 2%;
+        }
+    }
+
+
+    h2{
+        margin-top: 2%;
+        margin-bottom: 4%;
+    }
+}

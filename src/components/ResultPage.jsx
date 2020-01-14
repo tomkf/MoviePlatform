@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 //bootstrap components
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card';
 
 //utilities
 import util from '../utilities'
@@ -15,7 +16,7 @@ class ResultPage extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        film: null, 
+        films: null, 
         render: false
       }
     }  
@@ -48,7 +49,7 @@ class ResultPage extends React.Component {
       if (response.ok) { 
         let json = await response.json();
         if (json.total_results > 0) {
-          this.setState((prevState) => { return { film: json.results[0], render: true}})
+          this.retrunState(json.results)
         } 
       } else {
         alert("HTTP-Error: " + response.status);
@@ -56,27 +57,53 @@ class ResultPage extends React.Component {
        })();
     }
 
-    //render film result from the API
-    renderRes(film){
-      return  (  
-           <div>
-           <div className="movieCard"> 
-             <div className="moviePoster">
-               <img  src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
-             </div>
-             <div className="movieContent"> 
-             <div className="movieBanner"> 
-              <h2> {film.original_title} </h2> 
-              <h3> {util.parseDate(film.release_date)} </h3>
-              <h3> User's Ratings: {film.vote_average * 10} % </h3>
-             </div>
-             <h3> Overview: </h3>
-             <p> {film.overview} </p>
-             <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
-             </div>
-           </div>
-        </div>)
+    //pass api results to state
+    retrunState(json){
+      console.log(json)
+      let workingState = [];
+    
+        for(let i = 0; i < 8; i++){
+          if (json[i]){
+            workingState.push(json[i])
+          }
+        }
+        this.setState((prevState) => { return { films: workingState, render: true}})
       }
+
+
+
+      //render query results to page from state
+      renderRes(items){
+        let topResult = []
+        let top = items[0]
+        topResult.push(top)
+
+        let renderTop =   this.filmCard(topResult)
+
+        items.shift()
+        let filmArr =  this.filmCard(items) 
+
+        return (  <div> <div className="resultHeader"> <h2>Top Result: </h2> {renderTop}  <h2> Other Results: </h2> </div>  <div className="favBox"> { filmArr} </div> </div>)
+      }
+
+
+      filmCard(filmArray){
+       return filmArray.map(film =>  ( 
+          <Card bg="light" style={{ width: '20rem' }} className="filmCard" >
+          <Card.Img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${film.poster_path}`} alt={genericMovie}  variant="top"/>
+          <Card.Body>
+            <Card.Title> {film.title} </Card.Title> 
+            <Card.Subtitle className="rating"> Users Rating: {film.vote_average * 10} % </Card.Subtitle>
+            <Card.Subtitle className="rating"> {util.parseDate(film.release_date)} </Card.Subtitle>
+            <Card.Text>
+             {film.overview}
+            </Card.Text>
+          </Card.Body>
+           <NavLink to={`/movie/${film.id}`} > <Button variant="primary"> Click to find out more. </Button>   </NavLink> 
+        </Card>
+             ));
+      }
+      
 
     render() {
         return <div>
@@ -85,7 +112,7 @@ class ResultPage extends React.Component {
           <h1>SEARCH RESULT: </h1>
               <Search></Search>
            <div>
-             {this.state.render ?  this.renderRes(this.state.film) : "No matching search result, please try again." } 
+             {this.state.render ?  this.renderRes(this.state.films) : "No matching search result, please try again." } 
            </div>
            <span><NavLink to="/" exact>Back Home</NavLink></span>
            </div>
