@@ -2,9 +2,21 @@
 
 <ul>
 <li>1: Clone the repository into a working directory, cd into it and run the command "npm install" </li>
+  
+ <h3>  To run development server: </h3>
+  <ul>
+<li> 2: Run the command "npm start" to start the project's build server. </li>
+<li> 3: Visit the project at http://localhost:3000/ in your browser. </li>
+</ul>
+
+<h3>  To run Build server: </h3>
+<ul>
 <li> 2: Run the command "serve -s build" to start the project's build server. </li>
 <li> 3: Visit the project at http://localhost:5000 in your browser. </li>
 </ul>
+
+ </ul>
+
 
 
 <p> Note: if you experience a browser alert informing you of an HTTP error, it is likely due to the API token exceeding it's rate, go to file "utilities.js" in the src folder and replace the token variable with your own to resolve this problem. </p>
